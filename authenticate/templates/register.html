@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Register!{% endblock %}
+
+{% block content %}
+
+<h2 class="text-center display-4">Register</h2>
+<hr class="my-4">
+<br>
+<div class="col-md-6 offset-md-3">
+
+<form method="POST" action="{% url 'register' %}">
+    {% csrf_token %}
+    <div class="form-group">
+
+        {% if form.errors %}
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <h4 class="alert-heading">Error</h4>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <p>Please make the following corrections</p>
+                <hr>
+                {% for field in form %}
+                    {% if field.errors %}
+                        <p class="mb-0">{{ field.errors }}</p>
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+        {% endif %}
+
+        {{ form.as_p }}
+
+    <button type="submit" class="btn btn-info btn-block">Register</button>
+  </form>
+
+{% endblock %}
